@@ -22,12 +22,8 @@ export default {
         return {
           selected: null,
             usuarios: [],
-            muestroTabla:true
+            
         }
-    },
-    methods: {
-      verTabla(){
-      this.muestroTabla = !this.muestroTabla
     },
         addUsuarioTabla(usuario) {
             console.log(usuario);
@@ -36,7 +32,7 @@ export default {
         },
         
     }
-}
+
 </script>
 
 <style scoped>

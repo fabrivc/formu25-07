@@ -5,7 +5,8 @@
             <form>
             <div class="col-md-12 mb-2">
               <label class="form-label" for="nombre">Nombre y Apellido</label>
-              <input type="text" id="nombre" class="form-control" @keyup="validarNombre" v-model="usuario.nombre">
+               <p class="form-label">El nombre y apellido debe ser mayor a 10 caracteres y menor de 35</p>
+              <input type="text" minlength="10" maxlength="35" id="nombre" class="form-control" @keyup="validarNombre" v-model="usuario.nombre">
             </div>
              <div class="col-md-12 mb-2" v-if='mensajeNombre != ""'>
                 <p class="errorForm">{{ mensajeNombre }}</p>
@@ -19,7 +20,9 @@
             </div>
             <div class="col-md-12 mb-2">
               <label class="form-label" for="edad">Edad</label>
-              <input type="number" class="form-control" @keyup="validarEdad" v-model="usuario.edad">
+              <p class="form-label">Debes ser mayor de 18 años!</p>
+              <p class="form-label"></p>
+              <input  class="form-control" @keyup="validarEdad" v-model="usuario.edad">
             </div>
             <div class="col-md-12 mb-2" v-if='mensajeEdad != ""'>
                 <p class="errorForm">{{ mensajeEdad }}</p>
@@ -27,7 +30,8 @@
             <div class="col-md-12 mb-2">
               <label class="form-label" for="password">Contraseña</label>
               <p class="form-label">Incluir una mayúscula, un caracter especial (!#$..) y un número</p>
-              <input type="password" class="form-control" @keyup="validarPassword" v-model="usuario.password">
+              <p class="form-label">La contraseña debe ser de 5 caracteres como minimo y 10 como maximo respetando los parametros anteriores</p>
+              <input type="password" minlength="5" maxlength="10" class="form-control" @keyup="validarPassword" v-model="usuario.password">
             </div>
              <div class="col-md-12 mb-2" v-if='mensajePassword != ""'>
                 <p class="errorForm">{{ mensajePassword }}</p>
@@ -80,9 +84,9 @@ export default {
             return (this.validarNombre() && this.validarMail() && this.validarEdad() && this.validarPassword())
             },
         validarNombre(){
-            let regex1 = /^(([A-Za-z]+[\-\']?)*([A-Za-z]+)?\s)+([A-Za-z]+[\-\']?)*([A-Za-z]+)?$/;
+            let regex1 = /^([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\']+[\s])+([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\'])+[\s]?([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\'])?$/;
             if (regex1.test(this.usuario.nombre)){
-                this.mensajeNombre = "";
+                this.mensajeNombre = "Nombre valido";
                 return true;
             } else {
                 this.mensajeNombre = "Nombre inválido";
@@ -101,10 +105,10 @@ export default {
         },
         validarEdad(){
             if (this.usuario.edad >= 18 && this.usuario.edad <=100){
-                this.mensajeEdad = "";
+                this.mensajeEdad = "Edad valida, eres mayor de 18 años!";
                 return true;
             } else {
-                this.mensajeEdad = "Edad inválida";
+                this.mensajeEdad = "Edad inválida, eres menor de 18 años o mayor de 100!";
                 return false;
             }
         },
