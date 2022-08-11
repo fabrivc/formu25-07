@@ -84,7 +84,7 @@ export default {
             return (this.validarNombre() && this.validarMail() && this.validarEdad() && this.validarPassword())
             },
         validarNombre(){
-            let regex1 = /^([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\']+[\s])+([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\'])+[\s]?([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\'])?$/;
+            let regex1 = /^[a-zA-Z ]*$/
             if (regex1.test(this.usuario.nombre)){
                 this.mensajeNombre = "Nombre valido";
                 return true;
@@ -94,7 +94,7 @@ export default {
             }
         },
         validarMail(){
-            let regex2 =/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+            let regex2 =/^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i
             if (regex2.test(this.usuario.email)){
                 this.mensajeMail = "";
                 return true;
